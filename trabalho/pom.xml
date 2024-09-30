@@ -8,7 +8,7 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.edu.ibmec.bigdatacloud</groupId>
+	<groupId>br.edu.ibmec.bigdatacloud</groupId> 
 	<artifactId>trabalho</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>trabalho</name>
