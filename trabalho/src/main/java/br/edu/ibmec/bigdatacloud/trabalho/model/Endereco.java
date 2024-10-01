@@ -1,10 +1,15 @@
 package br.edu.ibmec.bigdatacloud.trabalho.model;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -47,4 +52,8 @@ public class Endereco {
     @NotBlank(message = "Campo CEP obrigatório")
     @Pattern(regexp = "^\\d{5}-\\d{3}$", message = "Insira um CEP válido, no formato XXXXX-XXX")
     private String cep;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 }
