@@ -1,6 +1,7 @@
 package br.edu.ibmec.bigdatacloud.trabalho.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class EnderecoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Endereco criarEndereco(Long clienteId, @Valid Endereco endereco) {
-        Cliente cliente = clienteRepository.findById(clienteId);
+    public Endereco criarEndereco(Long id, @Valid Endereco endereco) {
+        Cliente cliente = clienteRepository.findById(id);
         if (cliente == null) {
             throw new IllegalArgumentException("Cliente não encontrado");
         }
@@ -30,19 +31,19 @@ public class EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
-    public List<Endereco> buscarEnderecoCliente(Long clienteId) {
-        return enderecoRepository.findclienteById(clienteId);
+    public List<Endereco> buscarEnderecoCliente(Long id) {
+        return enderecoRepository.findClienteById(id);
     }
 
     public Endereco buscarEnderecoId(Long id) {
-            return enderecoRepository.findById(id);
+            return enderecoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Endereço não encontrado"));
         }
 
     public Endereco atualizarEndereco(Long id, Endereco atualizarEndereco) {
-        Endereco endereco = enderecoRepository.findById(id);
-        if (endereco == null) {
-            throw new IllegalArgumentException("Endereço não encontrado");
-        }
+        Endereco endereco = enderecoRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Endereço não encontrado"));
+        
 
         endereco.setRua(atualizarEndereco.getRua());
         endereco.setNumero(atualizarEndereco.getNumero());
@@ -56,10 +57,9 @@ public class EnderecoService {
     }
 
     public void removerEndereco(Long id) {
-        Endereco endereco = enderecoRepository.findById(id);
-        if (endereco == null) {
-            throw new IllegalArgumentException("Endereço não encontrado");
-        }
+        Endereco endereco = enderecoRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Endereço não encontrado"));
+        
         enderecoRepository.delete(endereco);
     }
     
