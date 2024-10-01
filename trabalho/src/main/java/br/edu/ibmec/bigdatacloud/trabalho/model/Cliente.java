@@ -2,15 +2,19 @@ package br.edu.ibmec.bigdatacloud.trabalho.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.NumberFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -35,6 +39,7 @@ public class Cliente {
 
     @Column
     @NotBlank(message = "Campo CPF obrigatório")
+    @Pattern(regexp = "^\\d{3}.\\d{3}.\\d{3}-\\d{2}$", message = "Insira um CPF válido, no formato XXX.XXX.XXX-XX")
     @CPF(message = "CPF inválido")
     private String cpf;
 
@@ -49,7 +54,10 @@ public class Cliente {
     private LocalDateTime dtNascimento;
 
     @Column
-    @Pattern(regexp = "\\d{7}-\\d{4}", message = "Número inválido")
+    @Pattern(regexp = "^\\d{7}-\\d{4}$", message = "Número inválido")
     private int telefone;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
 
 }

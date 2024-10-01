@@ -1,5 +1,6 @@
 package br.edu.ibmec.bigdatacloud.trabalho.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,21 @@ public class ClienteRepository {
     public boolean findClienteByCpf(String cpf) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findClienteByCpf'");
+    }
+
+    public Cliente findById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    }
+
+    public List<Cliente> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    public void delete(Cliente cliente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
     
 }
