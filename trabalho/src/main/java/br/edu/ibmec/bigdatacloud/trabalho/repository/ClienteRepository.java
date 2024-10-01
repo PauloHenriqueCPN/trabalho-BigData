@@ -1,44 +1,17 @@
 package br.edu.ibmec.bigdatacloud.trabalho.repository;
 
-import java.util.List;
 import java.util.Optional;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import br.edu.ibmec.bigdatacloud.trabalho.model.Cliente;
-import jakarta.validation.Valid;
 
 @Repository
-public class ClienteRepository {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    public Cliente save(@Valid Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
+    // Busca um cliente pelo e-mail, retorna Optional para lidar com null
+    Optional<Cliente> findByEmail(String email);
 
-    public boolean findClienteByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findClienteByEmail'");
-    }
+    // Busca um cliente pelo CPF, retorna Optional para lidar com null
+    Optional<Cliente> findByCpf(String cpf);
 
-    public boolean findClienteByCpf(String cpf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findClienteByCpf'");
-    }
-
-    public Cliente findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
-
-    public List<Cliente> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
-
-    public void delete(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-    
 }

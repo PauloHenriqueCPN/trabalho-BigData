@@ -26,11 +26,11 @@ public class ClienteService {
             throw new IllegalArgumentException("O Cliente deve ter no mínimo 18 anos");
         }
 
-        if (clienteRepository.findClienteByEmail(cliente.getEmail())) {
+        if (clienteRepository.findByEmail(cliente.getEmail()).isPresent()) {
             throw new ClienteException("E-mail já cadastrado");
         }
 
-        if (clienteRepository.findClienteByCpf(cliente.getCpf())) {
+        if (clienteRepository.findByCpf(cliente.getCpf()).isPresent()) {
             throw new ClienteException("CPF já cadastrado");
         }
 
@@ -38,7 +38,8 @@ public class ClienteService {
     }
     
     public Cliente buscarClienteId(Long id) {
-        return clienteRepository.findById(id);
+        return clienteRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
     }
 
     public List<Cliente> TodosClientes() {
@@ -47,10 +48,8 @@ public class ClienteService {
 
 
     public Cliente atualizarCliente(Long id, Cliente clienteRenova) {
-        Cliente cliente = clienteRepository.findById(id);
-        if (cliente == null) {
-            throw new IllegalArgumentException("Cliente não encontrado");
-        }
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
 
         cliente.setNome(clienteRenova.getNome());
         cliente.setEmail(clienteRenova.getEmail());
@@ -62,10 +61,8 @@ public class ClienteService {
     }
 
     public void removerCliente(Long id) {
-        Cliente cliente = clienteRepository.findById(id);
-        if (cliente == null) {
-            throw new IllegalArgumentException("Cliente não encontrado");
-        }
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
         clienteRepository.delete(cliente);
     }
 

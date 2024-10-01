@@ -22,10 +22,8 @@ public class EnderecoService {
     private ClienteRepository clienteRepository;
 
     public Endereco criarEndereco(Long id, @Valid Endereco endereco) {
-        Cliente cliente = clienteRepository.findById(id);
-        if (cliente == null) {
-            throw new IllegalArgumentException("Cliente não encontrado");
-        }
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
 
         endereco.setCliente(cliente);
         return enderecoRepository.save(endereco);
