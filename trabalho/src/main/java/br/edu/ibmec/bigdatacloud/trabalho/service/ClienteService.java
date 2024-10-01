@@ -61,7 +61,7 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public void deletarCliente(Long id) {
+    public void removerCliente(Long id) {
         Cliente cliente = clienteRepository.findById(id);
         if (cliente == null) {
             throw new IllegalArgumentException("Cliente não encontrado");
