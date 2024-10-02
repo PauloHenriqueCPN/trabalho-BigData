@@ -1,7 +1,6 @@
 package br.edu.ibmec.bigdatacloud.trabalho.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import br.edu.ibmec.bigdatacloud.trabalho.exceptions.ClienteException;
 import br.edu.ibmec.bigdatacloud.trabalho.model.Cliente;
 import br.edu.ibmec.bigdatacloud.trabalho.repository.ClienteRepository;
 import br.edu.ibmec.bigdatacloud.trabalho.validation.ClienteValidation;
-import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 
 
